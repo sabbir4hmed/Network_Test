@@ -2,6 +2,7 @@ package com.sabbir.waltonmobile.networktest;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -25,6 +26,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.sabbir.waltonmobile.networktest.FieldTest.SimTestActivity;
 
 import java.util.List;
 
@@ -98,7 +101,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startSimTest() {
-        Toast.makeText(this, "SIM Network Test Started!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this, SimTestActivity.class);
+        startActivity(intent);
+        finish();
         // এখানে আপনি SIM network speed test বা অন্য কোন test implement করতে পারেন
         // For now, just showing a message
     }
