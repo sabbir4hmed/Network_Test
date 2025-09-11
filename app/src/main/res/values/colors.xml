@@ -2,11 +2,19 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="splash_background">#2196F3</color>
+    <color name="splash_background">#4CAF50</color>
     <color name="main_background">#F5F5F5</color>
     <color name="primary_text">#333333</color>
     <color name="button_color">#4CAF50</color>
     <color name="textview_background">#FFFFFF</color>
     <color name="button_pressed">#45A049</color>
     <color name="textview_border">#DDDDDD</color>
+    <color name="start_button_color">#FF9800</color>
+    <color name="start_button_pressed">#F57C00</color>
+
+    <!-- New colors for instructions card -->
+    <color name="card_background">#FFFFFF</color>
+    <color name="header_text">#1976D2</color>
+    <color name="instruction_header">#2E7D32</color>
+    <color name="instruction_text">#424242</color>
 </resources>

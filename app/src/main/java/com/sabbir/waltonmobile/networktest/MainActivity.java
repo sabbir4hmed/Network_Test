@@ -30,7 +30,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnWifiTest, btnSimNetworkTest;
+    private Button btnWifiTest, btnSimNetworkTest, btnWifiStartTest, btnSimStartTest;
     private TextView tvWifiSSID, tvSim1Name, tvSim2Name;
     private static final int PERMISSION_REQUEST_CODE = 100;
 
@@ -43,10 +43,18 @@ public class MainActivity extends AppCompatActivity {
         // Initialize views
         btnWifiTest = findViewById(R.id.btnWifiTest);
         btnSimNetworkTest = findViewById(R.id.btnSimNetworkTest);
+        btnWifiStartTest = findViewById(R.id.btnWifiStartTest);
+        btnSimStartTest = findViewById(R.id.btnSimStartTest);
         tvWifiSSID = findViewById(R.id.tvWifiSSID);
         tvSim1Name = findViewById(R.id.tvSim1Name);
         tvSim2Name = findViewById(R.id.tvSim2Name);
-        
+
+        // Handle window insets for edge-to-edge
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         // Request permissions
         permissionRequest();
@@ -65,6 +73,34 @@ public class MainActivity extends AppCompatActivity {
                 checkSimCardStates();
             }
         });
+
+        // WiFi Start Test Button Click
+        btnWifiStartTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startWifiTest();
+            }
+        });
+
+        // SIM Start Test Button Click
+        btnSimStartTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startSimTest();
+            }
+        });
+    }
+
+    private void startWifiTest() {
+        Toast.makeText(this, "WiFi Speed Test Started!", Toast.LENGTH_SHORT).show();
+        // এখানে আপনি WiFi speed test বা অন্য কোন test implement করতে পারেন
+        // For now, just showing a message
+    }
+
+    private void startSimTest() {
+        Toast.makeText(this, "SIM Network Test Started!", Toast.LENGTH_SHORT).show();
+        // এখানে আপনি SIM network speed test বা অন্য কোন test implement করতে পারেন
+        // For now, just showing a message
     }
 
     private void permissionRequest() {
@@ -117,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
                         tvSim2Name.setText("SIM 2: Not Available");
                         tvSim1Name.setVisibility(View.VISIBLE);
                         tvSim2Name.setVisibility(View.VISIBLE);
+                        btnSimStartTest.setVisibility(View.GONE); // Hide start test button
                         break;
                     case TelephonyManager.SIM_STATE_READY:
                         Toast.makeText(this, "SIM card is ready", Toast.LENGTH_SHORT).show();
@@ -128,6 +165,7 @@ public class MainActivity extends AppCompatActivity {
                         tvSim2Name.setText("SIM 2: Unknown State");
                         tvSim1Name.setVisibility(View.VISIBLE);
                         tvSim2Name.setVisibility(View.VISIBLE);
+                        btnSimStartTest.setVisibility(View.GONE); // Hide start test button
                         break;
                     default:
                         Toast.makeText(this, "SIM card not ready", Toast.LENGTH_SHORT).show();
@@ -135,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
                         tvSim2Name.setText("SIM 2: Not Ready");
                         tvSim1Name.setVisibility(View.VISIBLE);
                         tvSim2Name.setVisibility(View.VISIBLE);
+                        btnSimStartTest.setVisibility(View.GONE); // Hide start test button
                         break;
                 }
             }
@@ -176,6 +215,11 @@ public class MainActivity extends AppCompatActivity {
                                 tvSim2Name.setText("SIM 2: " + simInfo);
                             }
                         }
+                        // Show start test button if SIM cards are available
+                        btnSimStartTest.setVisibility(View.VISIBLE);
+                    } else {
+                        // Hide start test button if no SIM cards
+                        btnSimStartTest.setVisibility(View.GONE);
                     }
 
                     // Show both TextViews
@@ -190,9 +234,11 @@ public class MainActivity extends AppCompatActivity {
                 if (!carrierName.isEmpty()) {
                     tvSim1Name.setText("SIM 1: " + carrierName);
                     tvSim2Name.setText("SIM 2: Not Available");
+                    btnSimStartTest.setVisibility(View.VISIBLE); // Show start test button
                 } else {
                     tvSim1Name.setText("SIM 1: Carrier name unavailable");
                     tvSim2Name.setText("SIM 2: Not Available");
+                    btnSimStartTest.setVisibility(View.GONE); // Hide start test button
                 }
 
                 tvSim1Name.setVisibility(View.VISIBLE);
@@ -203,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
             tvSim2Name.setText("SIM 2: Error reading info");
             tvSim1Name.setVisibility(View.VISIBLE);
             tvSim2Name.setVisibility(View.VISIBLE);
+            btnSimStartTest.setVisibility(View.GONE); // Hide start test button on error
         }
     }
 
@@ -225,6 +272,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(this, "Location permission required for WiFi SSID", Toast.LENGTH_LONG).show();
                     tvWifiSSID.setText("WiFi SSID: Location permission required");
                     tvWifiSSID.setVisibility(View.VISIBLE);
+                    btnWifiStartTest.setVisibility(View.GONE); // Hide start test button
                     return;
                 }
 
@@ -241,13 +289,16 @@ public class MainActivity extends AppCompatActivity {
                         ssid = ssid.replace("\"", "");
                         Toast.makeText(this, "WiFi is connected to: " + ssid, Toast.LENGTH_SHORT).show();
                         tvWifiSSID.setText("WiFi SSID: " + ssid);
+                        btnWifiStartTest.setVisibility(View.VISIBLE); // Show start test button
                     } else {
                         Toast.makeText(this, "WiFi connected but SSID unavailable", Toast.LENGTH_SHORT).show();
                         tvWifiSSID.setText("WiFi SSID: Connected (Name unavailable)");
+                        btnWifiStartTest.setVisibility(View.VISIBLE); // Show start test button
                     }
                 } else {
                     Toast.makeText(this, "WiFi is ON but not connected", Toast.LENGTH_SHORT).show();
                     tvWifiSSID.setText("WiFi SSID: Not Connected");
+                    btnWifiStartTest.setVisibility(View.GONE); // Hide start test button
                 }
 
                 tvWifiSSID.setVisibility(View.VISIBLE);
@@ -255,11 +306,13 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Please turn on wifi and connect", Toast.LENGTH_SHORT).show();
                 tvWifiSSID.setText("WiFi SSID: WiFi is OFF");
                 tvWifiSSID.setVisibility(View.VISIBLE);
+                btnWifiStartTest.setVisibility(View.GONE); // Hide start test button
             }
         } else {
             Toast.makeText(this, "WiFi not available", Toast.LENGTH_SHORT).show();
             tvWifiSSID.setText("WiFi SSID: Not Available");
             tvWifiSSID.setVisibility(View.VISIBLE);
+            btnWifiStartTest.setVisibility(View.GONE); // Hide start test button
         }
     }
 
