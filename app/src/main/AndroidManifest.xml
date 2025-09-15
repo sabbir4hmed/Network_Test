@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NetworkTest">
         <activity
+            android:name=".FieldTest.FieldTestActivity"
+            android:exported="false" />
+        <activity
             android:name=".FieldTest.SimTestActivity"
             android:exported="false" />
         <activity

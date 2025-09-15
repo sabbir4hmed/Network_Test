@@ -39,4 +39,20 @@ dependencies {
     androidTestImplementation libs.espresso.core
     implementation libs.cardview
 
+    // RecyclerView for data table
+    implementation libs.recyclerview
+
+
+
+    // Location services (optional, if you want Google Play Services location)
+    implementation libs.play.services.location
+
+    // For better permission handling (optional)
+    implementation libs.core
+
+    // Testing dependencies (optional)
+    testImplementation libs.junit
+    androidTestImplementation libs.junit.v121
+    androidTestImplementation libs.espresso.core.v361
+
 }

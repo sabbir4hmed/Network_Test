@@ -1,5 +1,6 @@
 package com.sabbir.waltonmobile.networktest.FieldTest;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.text.DisplayOptions;
 import android.os.Build;
@@ -65,8 +66,8 @@ public class SimTestActivity extends AppCompatActivity {
                     Toast.makeText(SimTestActivity.this, "Field test data saved successfully!", Toast.LENGTH_SHORT).show();
 
                     // Optional: Navigate to next activity or show test results
-                    // Intent intent = new Intent(MainActivity.this, FieldTestActivity.class);
-                    // startActivity(intent);
+                    Intent intent = new Intent(SimTestActivity.this, FieldTestActivity.class);
+                    startActivity(intent);
                 }
             }
         });
