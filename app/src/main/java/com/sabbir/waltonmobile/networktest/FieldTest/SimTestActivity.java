@@ -106,7 +106,7 @@ public class SimTestActivity extends AppCompatActivity {
 
     private void saveFieldTestData() {
         // Get current timestamp
-        String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+        String timestamp = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.getDefault()).format(new Date());
 
         // Collect form data
         String id = etId.getText().toString().trim();
@@ -228,6 +228,7 @@ public class SimTestActivity extends AppCompatActivity {
         StringBuilder buildInfo = new StringBuilder();
         buildInfo.append("Android Version: ").append(Build.VERSION.RELEASE).append("\n");
         buildInfo.append("API Level: ").append(Build.VERSION.SDK_INT).append("\n");
+        buildInfo.append("Build Number: ").append(Build.DISPLAY).append("\n");
         buildInfo.append("Build ID: ").append(Build.ID).append("\n");
         buildInfo.append("Build Type: ").append(Build.TYPE).append("\n");
         buildInfo.append("Build Tags: ").append(Build.TAGS).append("\n");
