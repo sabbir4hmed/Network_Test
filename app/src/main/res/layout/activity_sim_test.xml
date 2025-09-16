@@ -101,7 +101,7 @@
                 <EditText
                     android:id="@+id/etBuildVersion"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="200dp"
                     android:background="@drawable/edittext_background_readonly"
                     android:enabled="false"
                     android:gravity="top"

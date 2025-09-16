@@ -23,14 +23,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Control Card -->
+        <!-- Controls Card -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardControls"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="4dp"
             app:cardBackgroundColor="@color/card_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +57,7 @@
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/edittext_background" />
 
-                <!-- SIM Detection Display -->
+                <!-- SIM Detection -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -97,7 +95,6 @@
                         android:text="SIM 2: Not Detected"
                         android:textColor="@color/primary_text"
                         android:textSize="14sp" />
-
                 </LinearLayout>
 
                 <!-- SIM Selection -->
@@ -132,7 +129,6 @@
                         android:text="SIM 2"
                         android:textColor="@color/primary_text"
                         android:enabled="false" />
-
                 </LinearLayout>
 
                 <!-- Control Buttons -->
@@ -164,7 +160,6 @@
                         android:textColor="@color/white"
                         android:textStyle="bold"
                         android:enabled="false" />
-
                 </LinearLayout>
 
                 <Button
@@ -177,9 +172,7 @@
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:enabled="false" />
-
             </LinearLayout>
-
         </androidx.cardview.widget.CardView>
 
         <!-- Data Table Card -->
@@ -188,9 +181,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/card_background"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/main_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardControls">
@@ -199,8 +191,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="10dp">
 
+                <!-- Title above RecyclerView -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -210,104 +203,18 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="12dp" />
 
-                <!-- Table Header -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@color/button_color"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.5"
-                        android:text="Model"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:gravity="center" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Time &amp; Date"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:gravity="center" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="DBM"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:gravity="center" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.5"
-                        android:text="Operator"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:gravity="center" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Location"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:gravity="center" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1.5"
-                        android:text="Signal"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:gravity="center" />
-
-                </LinearLayout>
-
-                <!-- Data Rows Container -->
+                <!-- RecyclerView with fixed height -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewData"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:maxHeight="300dp" />
+                    android:layout_height="350dp"
+                    android:scrollbars="vertical" />
 
             </LinearLayout>
-
         </androidx.cardview.widget.CardView>
 
-        <!-- SIM 2 Start Button -->
-        <Button
-            android:id="@+id/btnStartSim2"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/button_background"
-            android:text="Start Test for SIM 2"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:enabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardDataTable" />
 
-        <!-- Report Generate Button -->
+        <!-- Report Generate -->
         <Button
             android:id="@+id/btnGenerateReport"
             android:layout_width="0dp"
@@ -319,8 +226,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnStartSim2" />
+            app:layout_constraintTop_toBottomOf="@+id/cardDataTable"  />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </ScrollView>

@@ -1,71 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="8dp"
-    android:background="?android:attr/selectableItemBackground">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="8dp"
+    android:background="#FFFFFF"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
 
-    <TextView
-        android:id="@+id/tvModel"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1.5"
-        android:text="Model"
-        android:textSize="10sp"
-        android:gravity="center"
-        android:padding="4dp" />
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="5dp"
+        android:layout_marginBottom="0dp"
+        android:clipToOutline="true"
+        android:elevation="2dp">
 
-    <TextView
-        android:id="@+id/tvTimestamp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:text="Time"
-        android:textSize="10sp"
-        android:gravity="center"
-        android:padding="4dp" />
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time: 16:24:54"
+            android:textColor="@color/primary_text"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvDbm"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="DBM"
-        android:textSize="10sp"
-        android:gravity="center"
-        android:padding="4dp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date: 16/09/2025"
+            android:textColor="@color/primary_text" />
 
-    <TextView
-        android:id="@+id/tvOperator"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1.5"
-        android:text="Operator"
-        android:textSize="10sp"
-        android:gravity="center"
-        android:padding="4dp" />
+        <TextView
+            android:id="@+id/tvOperator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Operator: airtel"
+            android:textColor="@color/primary_text" />
 
-    <TextView
-        android:id="@+id/tvLocation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:text="Location"
-        android:textSize="9sp"
-        android:gravity="center"
-        android:padding="4dp" />
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location: 24.0334, 90.2358"
+            android:textColor="@color/primary_text" />
 
-    <TextView
-        android:id="@+id/tvSignalQuality"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1.5"
-        android:text="Signal"
-        android:textSize="10sp"
-        android:gravity="center"
-        android:padding="4dp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvDBM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DBM: -103"
+            android:textColor="@color/primary_text" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvQuality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quality: Poor"
+            android:textColor="@color/primary_text" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -99,7 +99,6 @@ public class FieldTestActivity extends AppCompatActivity implements LocationList
         btnStart = findViewById(R.id.btnStart);
         btnPause = findViewById(R.id.btnPause);
         btnStop = findViewById(R.id.btnStop);
-        btnStartSim2 = findViewById(R.id.btnStartSim2);
         btnGenerateReport = findViewById(R.id.btnGenerateReport);
         recyclerViewData = findViewById(R.id.recyclerViewData);
     }
@@ -165,7 +164,6 @@ public class FieldTestActivity extends AppCompatActivity implements LocationList
         btnStart.setOnClickListener(v -> startTest());
         btnPause.setOnClickListener(v -> pauseTest());
         btnStop.setOnClickListener(v -> stopTest());
-        btnStartSim2.setOnClickListener(v -> startSim2Test());
         btnGenerateReport.setOnClickListener(v -> generateReport());
     }
 
