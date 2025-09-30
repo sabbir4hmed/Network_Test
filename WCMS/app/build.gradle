@@ -48,4 +48,15 @@ dependencies {
     // For future barcode scanning
     implementation libs.core
     implementation libs.zxing.android.embedded
+
+    // OkHttp Logging Interceptor (for debugging)
+
+    implementation libs.logging.interceptor
+
+
+    // Barcode Scanning
+
+    implementation libs.core.v351
+
+    implementation libs.zxing.android.embedded
 }
