@@ -11,4 +11,10 @@
     <color name="light_gray">#BDBDBD</color>
 
     <color name="background">#F5F5F5</color>
+
+    <!-- Scanner colors -->
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="semi_transparent_black">#AA000000</color>
+    <color name="semi_transparent_white">#CCFFFFFF</color>
+
 </resources>

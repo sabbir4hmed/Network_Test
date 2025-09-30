@@ -31,32 +31,44 @@ android {
 dependencies {
 
     implementation libs.appcompat
+
     implementation libs.material
+
     implementation libs.activity
+
     implementation libs.constraintlayout
+
+    implementation libs.recyclerview
+
+    implementation libs.cardview
+
+
+
     testImplementation libs.junit
+
     androidTestImplementation libs.ext.junit
+
     androidTestImplementation libs.espresso.core
 
+
     // Retrofit for API calls
+
     implementation libs.retrofit
+
     implementation libs.converter.gson
 
+
     // Gson for JSON parsing
+
     implementation libs.gson
 
-    // For future barcode scanning
-    implementation libs.core
-    implementation libs.zxing.android.embedded
 
     // OkHttp Logging Interceptor (for debugging)
 
     implementation libs.logging.interceptor
 
 
-    // Barcode Scanning
+    // Code Scanner Library - Supports ALL barcode formats (QR, Barcode, etc.)
 
-    implementation libs.core.v351
-
-    implementation libs.zxing.android.embedded
+    implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
 }

@@ -2,6 +2,7 @@ package com.sabbir.waltonbd.wcmsproductchecker.Api;
 
 import com.sabbir.waltonbd.wcmsproductchecker.Models.LoginRequest;
 import com.sabbir.waltonbd.wcmsproductchecker.Models.LoginResponse;
+import com.sabbir.waltonbd.wcmsproductchecker.Models.ProductResponse;
 //import com.sabbir.waltonbd.wcmsproductchecker.Models.ProductResponse;
 
 import retrofit2.Call;
@@ -17,10 +18,7 @@ public interface ApiService {
     @POST("api/account/login")
     Call<LoginResponse> login(@Body LoginRequest loginRequest);
 
-   /* // Product GET API (for future use)
-    @GET("api/product")
-    Call<ProductResponse> getProduct(
-            @Header("Authorization") String token,
-            @Query("imei") String imei
-    );*/
+    // Get Product by IMEI or Code
+    @GET("api/report/GetMobileHistory")
+    Call<ProductResponse> getProductByImei(@Query("codeOrImei") String codeOrImei);
 }
