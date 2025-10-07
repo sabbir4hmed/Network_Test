@@ -31,6 +31,9 @@ public class ProductResponse {
     @SerializedName("deliveryDate")
     private String deliveryDate;
 
+    @SerializedName("boxCode")
+    private String boxCode;
+
     // Constructor
     public ProductResponse() {
     }
@@ -106,5 +109,13 @@ public class ProductResponse {
 
     public void setDeliveryDate(String deliveryDate) {
         this.deliveryDate = deliveryDate;
+    }
+
+    public String getBoxCode() {
+        return boxCode;
+    }
+
+    public void setBoxCode(String boxCode) {
+        this.boxCode = boxCode;
     }
 }

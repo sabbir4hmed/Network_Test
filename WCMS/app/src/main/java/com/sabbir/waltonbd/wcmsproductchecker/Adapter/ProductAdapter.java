@@ -54,7 +54,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     static class ProductViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvModel, tvMobileCode, tvImei1, tvImei2, tvColor;
-        private TextView tvGrade, tvProductionGrade, tvGradeReason, tvDeliveryDate;
+        private TextView tvGrade, tvProductionGrade, tvGradeReason, tvDeliveryDate, tvBoxCode;
         private LinearLayout layoutGradeReason;
 
         public ProductViewHolder(@NonNull View itemView) {
@@ -68,6 +68,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             tvProductionGrade = itemView.findViewById(R.id.tvProductionGrade);
             tvGradeReason = itemView.findViewById(R.id.tvGradeReason);
             tvDeliveryDate = itemView.findViewById(R.id.tvDeliveryDate);
+            tvBoxCode = itemView.findViewById(R.id.tvBoxCode);
             layoutGradeReason = itemView.findViewById(R.id.layoutGradeReason);
         }
 
@@ -80,6 +81,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             tvGrade.setText(product.getGrade() != null ? product.getGrade() : "N/A");
             tvProductionGrade.setText(product.getProductionGrade() != null ? product.getProductionGrade() : "N/A");
             tvDeliveryDate.setText(product.getDeliveryDate() != null ? product.getDeliveryDate() : "N/A");
+            tvBoxCode.setText(product.getBoxCode() != null ? product.getBoxCode() : "N/A");
 
             // Show grade reason if exists
             if (product.getGradeReason() != null && !product.getGradeReason().isEmpty()) {

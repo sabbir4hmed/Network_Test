@@ -262,7 +262,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -280,6 +281,33 @@
                 android:text="2024-11-16 01:08 PM"
                 android:textSize="14sp"
                 android:textColor="@color/primary"
+                android:textStyle="bold"
+                android:gravity="end" />
+
+        </LinearLayout>
+
+        <!-- Box Code -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Box Code:"
+                android:textSize="14sp"
+                android:textColor="@color/gray" />
+
+            <TextView
+                android:id="@+id/tvBoxCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text="CKDN7500000401"
+                android:textSize="14sp"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:gravity="end" />
 
