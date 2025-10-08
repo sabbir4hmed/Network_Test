@@ -30,9 +30,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:cardBackgroundColor="@color/card_background"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvHeader">
+            app:layout_constraintTop_toBottomOf="@id/tvHeader">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -42,6 +44,7 @@
 
                 <!-- Band Choice -->
                 <TextView
+                    android:id="@+id/tvBandChoiceLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Band Choice"
@@ -52,10 +55,21 @@
                 <Spinner
                     android:id="@+id/spinnerBandChoice"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="40dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/edittext_background" />
+
+                <!-- Show Selected Band -->
+                <TextView
+                    android:id="@+id/txtBandStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Current Band: None"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary_text"
+                    android:layout_marginBottom="16dp" />
 
                 <!-- SIM Detection -->
                 <TextView
@@ -172,6 +186,106 @@
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:enabled="false" />
+
+                <!-- dBm Meters Section -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Signal Strength (dBm)"
+                    android:textColor="@color/button_color"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="12dp">
+
+                    <!-- SIM 1 dBm Meter -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:orientation="vertical"
+                        android:background="@drawable/edittext_background_readonly"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SIM 1"
+                            android:textColor="@color/button_color"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:layout_gravity="center_horizontal" />
+
+                        <TextView
+                            android:id="@+id/tvSim1DbmValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="-- dBm"
+                            android:textColor="@color/primary_text"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_gravity="center_horizontal" />
+
+                        <TextView
+                            android:id="@+id/tvSim1SignalStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="No Signal"
+                            android:textColor="@color/primary_text"
+                            android:textSize="12sp"
+                            android:layout_gravity="center_horizontal" />
+                    </LinearLayout>
+
+                    <!-- SIM 2 dBm Meter -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:orientation="vertical"
+                        android:background="@drawable/edittext_background_readonly"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SIM 2"
+                            android:textColor="@color/button_color"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:layout_gravity="center_horizontal" />
+
+                        <TextView
+                            android:id="@+id/tvSim2DbmValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="-- dBm"
+                            android:textColor="@color/primary_text"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_gravity="center_horizontal" />
+
+                        <TextView
+                            android:id="@+id/tvSim2SignalStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="No Signal"
+                            android:textColor="@color/primary_text"
+                            android:textSize="12sp"
+                            android:layout_gravity="center_horizontal" />
+                    </LinearLayout>
+                </LinearLayout>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -181,11 +295,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
             app:cardBackgroundColor="@color/main_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardControls">
+            app:layout_constraintTop_toBottomOf="@id/cardControls">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -213,7 +328,6 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-
         <!-- Report Generate -->
         <Button
             android:id="@+id/btnGenerateReport"
@@ -226,7 +340,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardDataTable"  />
+            app:layout_constraintTop_toBottomOf="@id/cardDataTable" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
