@@ -26,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,8 +37,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.sabbir.waltonmobile.networktest.ExcelExporter;
 import com.sabbir.waltonmobile.networktest.R;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,6 +57,9 @@ public class FieldTestActivity extends AppCompatActivity implements LocationList
     private CheckBox cbSim1, cbSim2;
     private Button btnStart, btnPause, btnStop, btnGenerateReport;
     private RecyclerView recyclerViewData;
+
+    private ProgressBar progressBar;
+    private TextView tvProgressStatus;
 
     // dBm Meter TextViews
     private TextView tvSim1DbmValue, tvSim2DbmValue;
@@ -128,6 +134,10 @@ public class FieldTestActivity extends AppCompatActivity implements LocationList
         btnStop = findViewById(R.id.btnStop);
         btnGenerateReport = findViewById(R.id.btnGenerateReport);
         recyclerViewData = findViewById(R.id.recyclerViewData);
+
+        // Initialize ProgressBar and status text
+        progressBar = findViewById(R.id.progressBar);
+        tvProgressStatus = findViewById(R.id.tvProgressStatus);
 
         // Initialize dBm meter TextViews
         tvSim1DbmValue = findViewById(R.id.tvSim1DbmValue);
@@ -734,7 +744,123 @@ public class FieldTestActivity extends AppCompatActivity implements LocationList
     }
 
     private void generateReport() {
-        Toast.makeText(this, "Report feature coming soon", Toast.LENGTH_SHORT).show();
+        if (signalDataList == null || signalDataList.isEmpty()) {
+            Toast.makeText(this, "No data to export yet. Start a test first.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Disable button and show progress
+        btnGenerateReport.setEnabled(false);
+        progressBar.setVisibility(View.VISIBLE);
+        tvProgressStatus.setVisibility(View.VISIBLE);
+        progressBar.setProgress(0);
+        tvProgressStatus.setText("Preparing report...");
+
+        // Run report generation in background thread
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    // Update progress: 10%
+                    updateProgress(10, "Collecting data...");
+                    Thread.sleep(200);
+
+                    String timePart = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+                    String fileName = "Field_Test_Report_" + timePart + ".xlsx";
+
+                    String bandChoice = spinnerBandChoice.getSelectedItem() != null
+                            ? spinnerBandChoice.getSelectedItem().toString()
+                            : "Unknown";
+                    int testedSimLocal = currentTestingSim;
+
+                    // Update progress: 30%
+                    updateProgress(30, "Creating Excel workbook...");
+                    Thread.sleep(200);
+
+                    // Generate the Excel file with progress callback
+                    File xlsx = ExcelExporter.exportSignalDataWithProgress(
+                            FieldTestActivity.this,
+                            fileName,
+                            signalDataList,
+                            bandChoice,
+                            testedSimLocal,
+                            sharedPreferences,
+                            new ExcelExporter.ProgressCallback() {
+                                @Override
+                                public void onProgress(int progress, String message) {
+                                    updateProgress(progress, message);
+                                }
+                            }
+                    );
+
+                    // Update progress: 95%
+                    updateProgress(95, "Finalizing report...");
+                    Thread.sleep(200);
+
+                    // Increment report count
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    int reportCount = sharedPreferences.getInt("report_count", 0);
+                    editor.putInt("report_count", reportCount + 1);
+                    editor.apply();
+
+                    // Update progress: 100%
+                    updateProgress(100, "Report generated successfully!");
+                    Thread.sleep(300);
+
+                    final File finalXlsx = xlsx;
+
+                    // Show success on UI thread
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBar.setVisibility(View.GONE);
+                            tvProgressStatus.setVisibility(View.GONE);
+                            btnGenerateReport.setEnabled(true);
+
+                            Toast.makeText(FieldTestActivity.this,
+                                    "Report saved: " + finalXlsx.getName(),
+                                    Toast.LENGTH_LONG).show();
+                            Log.d(TAG, "Report saved at: " + finalXlsx.getAbsolutePath());
+
+                            // Offer to open/share the file
+                            //promptOpenShare(finalXlsx);
+                        }
+                    });
+
+                } catch (OutOfMemoryError oom) {
+                    Log.e(TAG, "OutOfMemoryError generating report", oom);
+                    showError("Not enough memory to create Excel. Try fewer rows.");
+                } catch (Exception e) {
+                    Log.e(TAG, "Error generating Excel report", e);
+                    showError("Failed to generate report: " + e.getMessage());
+                }
+            }
+        }).start();
+    }
+
+    // Helper method to update progress on UI thread
+    private void updateProgress(final int progress, final String message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setProgress(progress);
+                tvProgressStatus.setText(message);
+                Log.d(TAG, "Progress: " + progress + "% - " + message);
+            }
+        });
+    }
+
+    // Helper method to show error on UI thread
+    private void showError(final String message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressBar.setVisibility(View.GONE);
+                tvProgressStatus.setVisibility(View.GONE);
+                btnGenerateReport.setEnabled(true);
+                Toast.makeText(FieldTestActivity.this, message, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     // LocationListener methods
